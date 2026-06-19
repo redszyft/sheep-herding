@@ -16,7 +16,7 @@ n_steps = 2000
 target = np.array([10,2])
 
 n_sheep = 30
-v_a = 0.04 # sheep speed
+v_a = 0.05 # sheep speed
 gamma = 0.005 # sheep2sheep attraction
 la = 0.01 # typical sheep size
 r_attr = np.sqrt(n_sheep) * la # sheep attraction radius
@@ -26,7 +26,7 @@ r_align = 0.1 # sheep alignment radius
 n_attemps = 20
 ls = 0.3 # dog influence scale
 delta = 0.9 # dog repulsion strength
-dog_v = 20 * v_a
+dog_v = 0.7
 
 w_std = 5
 w_mean = 1
@@ -39,7 +39,7 @@ def run_sim():
     dog_tracker = np.zeros((n_steps, 2))
     dog_tracker[0] = dog_r.copy()
 
-    sheep_pos, sheep_orient = make_herd(n_sheep, 3, 2, max_radius=0.5)
+    sheep_pos, sheep_orient = make_herd(n_sheep, 4, 4, max_radius=0.5)
     sheep_pos_tracker = np.zeros((n_steps, sheep_pos.shape[0], sheep_pos.shape[1]))
     sheep_pos_tracker[0] = sheep_pos.copy()
     sheep_orient_tracker = np.zeros((n_steps, sheep_orient.shape[0], sheep_orient.shape[1]))
@@ -79,5 +79,5 @@ def run_sim():
             print('Success at step: ', i)
             break
 
-    return dog_tracker , sheep_pos_tracker
+    return dog_tracker , sheep_pos_tracker, target, i
         
